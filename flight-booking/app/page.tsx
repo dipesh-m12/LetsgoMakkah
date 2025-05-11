@@ -74,7 +74,7 @@ export default function Home() {
     try {
       console.log(`Fetching suggestions for ${type}: ${value}`);
       const res = await axios.get(
-        "https://letsgo-makkah.vercel.app//api/flights/suggest",
+        "https://letsgo-makkah.vercel.app/api/flights/suggest",
         {
           params: { query: value },
         }
@@ -112,7 +112,7 @@ export default function Home() {
     try {
       console.log(`Searching flights from ${from} to ${to}`);
       const res = await axios.get(
-        "https://letsgo-makkah.vercel.app//api/flights/search",
+        "https://letsgo-makkah.vercel.app/api/flights/search",
         {
           params: { from, to },
         }
@@ -160,7 +160,7 @@ export default function Home() {
     try {
       console.log(`Booking flight: ${selectedFlight._id}`);
       const res = await axios.post(
-        "https://letsgo-makkah.vercel.app//api/flights/book",
+        "https://letsgo-makkah.vercel.app/api/flights/book",
         {
           flightId: selectedFlight._id,
         }
@@ -180,7 +180,7 @@ export default function Home() {
 
         // Download ticket PDF
         const ticketRes = await fetch(
-          `https://letsgo-makkah.vercel.app//api/ticket?bookingId=${res.data.data._id}`
+          `https://letsgo-makkah.vercel.app/api/ticket?bookingId=${res.data.data._id}`
         );
         if (!ticketRes.ok) {
           throw new Error("Failed to fetch ticket");
@@ -213,7 +213,7 @@ export default function Home() {
       try {
         console.log("Fetching booking history");
         const res = await axios.get(
-          "https://letsgo-makkah.vercel.app//api/bookings"
+          "https://letsgo-makkah.vercel.app/api/bookings"
         );
         console.log("Bookings response:", res.data);
         if (res.data.success) {
@@ -736,7 +736,7 @@ export default function Home() {
                                 onClick={async () => {
                                   try {
                                     const ticketRes = await fetch(
-                                      `https://letsgo-makkah.vercel.app//api/ticket?bookingId=${booking._id}`
+                                      `https://letsgo-makkah.vercel.app/api/ticket?bookingId=${booking._id}`
                                     );
                                     if (!ticketRes.ok) {
                                       throw new Error("Failed to fetch ticket");
