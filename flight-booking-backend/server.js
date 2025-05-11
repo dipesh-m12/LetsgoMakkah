@@ -171,6 +171,10 @@ const initializeData = async () => {
 };
 initializeData();
 
+app.get("/", (req, res) => {
+  res.send("Let's go Makkah!");
+});
+
 // Routes
 // Airport suggestions
 app.get("/api/flights/suggest", async (req, res) => {
