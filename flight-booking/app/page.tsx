@@ -73,9 +73,12 @@ export default function Home() {
     }
     try {
       console.log(`Fetching suggestions for ${type}: ${value}`);
-      const res = await axios.get("http://localhost:3001/api/flights/suggest", {
-        params: { query: value },
-      });
+      const res = await axios.get(
+        "https://letsgo-makkah.vercel.app//api/flights/suggest",
+        {
+          params: { query: value },
+        }
+      );
       console.log("Suggestions response:", res.data);
       if (res.data.success) {
         setSuggestions(res.data.data || []);
@@ -108,9 +111,12 @@ export default function Home() {
     setIsLoading(true);
     try {
       console.log(`Searching flights from ${from} to ${to}`);
-      const res = await axios.get("http://localhost:3001/api/flights/search", {
-        params: { from, to },
-      });
+      const res = await axios.get(
+        "https://letsgo-makkah.vercel.app//api/flights/search",
+        {
+          params: { from, to },
+        }
+      );
       console.log("Search response:", res.data);
       if (res.data.success) {
         setFlights(res.data.data || []);
@@ -153,9 +159,12 @@ export default function Home() {
     setIsLoading(true);
     try {
       console.log(`Booking flight: ${selectedFlight._id}`);
-      const res = await axios.post("http://localhost:3001/api/flights/book", {
-        flightId: selectedFlight._id,
-      });
+      const res = await axios.post(
+        "https://letsgo-makkah.vercel.app//api/flights/book",
+        {
+          flightId: selectedFlight._id,
+        }
+      );
       console.log("Booking response:", res.data);
       if (res.data.success) {
         setWallet(wallet - res.data.data.price);
@@ -171,7 +180,7 @@ export default function Home() {
 
         // Download ticket PDF
         const ticketRes = await fetch(
-          `http://localhost:3001/api/ticket?bookingId=${res.data.data._id}`
+          `https://letsgo-makkah.vercel.app//api/ticket?bookingId=${res.data.data._id}`
         );
         if (!ticketRes.ok) {
           throw new Error("Failed to fetch ticket");
@@ -203,7 +212,9 @@ export default function Home() {
     const fetchBookings = async () => {
       try {
         console.log("Fetching booking history");
-        const res = await axios.get("http://localhost:3001/api/bookings");
+        const res = await axios.get(
+          "https://letsgo-makkah.vercel.app//api/bookings"
+        );
         console.log("Bookings response:", res.data);
         if (res.data.success) {
           setBookings(res.data.data || []);
@@ -278,7 +289,7 @@ export default function Home() {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-white text-white hover:bg-white/20"
+                className="border-white  text-blue-500 hover:bg-white/20"
                 onClick={() => setActiveTab("history")}
               >
                 View Bookings
@@ -725,7 +736,7 @@ export default function Home() {
                                 onClick={async () => {
                                   try {
                                     const ticketRes = await fetch(
-                                      `http://localhost:3001/api/ticket?bookingId=${booking._id}`
+                                      `https://letsgo-makkah.vercel.app//api/ticket?bookingId=${booking._id}`
                                     );
                                     if (!ticketRes.ok) {
                                       throw new Error("Failed to fetch ticket");
